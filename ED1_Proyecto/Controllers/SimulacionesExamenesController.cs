@@ -10,6 +10,7 @@ namespace ED1_Proyecto.Controllers
     public class SimulacionesExamenesController : Controller
     {
         public static List<SimulacionExamen> DatosExamen = new List<SimulacionExamen>();
+        public static List<Paciente> DatosPacientesSimulados = new List<Paciente>();
 
         // GET: SimulacionesExamenes
         public ActionResult Index()
@@ -35,15 +36,36 @@ namespace ED1_Proyecto.Controllers
         {
             try
             {
+                var rand = new Random();
+
+                Paciente PacienteSimulado = new Paciente()
+                {
+
+                    Edad = rand.Next(80),
+                    Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Identificacion="Identificacion"+(DatosPacientesSimulados.Count + 1).ToString(),
+                    Departamento = "Departamento" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Municipio ="Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
+
+                    Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    DescripcionContagioPosible = "Descripcion" + (DatosPacientesSimulados.Count + 1).ToString(),
+
+                    
+
+                };
 
                 SimulacionExamen PruebaContagio = new SimulacionExamen()
                 {
-                    ViajeEuropa = Convert.ToBoolean(collection["ViajeEuropa"].Split(',')[0]),
+                    ViajeEuropa = Convert.ToBoolean(collection["ViajeEuropa"]),
                     ConocidoContagiado = Convert.ToBoolean(collection["ConocidoContagiado"]),
                     FamiliarContagiado = Convert.ToBoolean(collection["FamiliarContagiado"]),
                     ReunionesSociales = Convert.ToBoolean(collection["ReunionesSociales"])
 
                 };
+
+
+
                 DatosExamen.Add(PruebaContagio);
 
                 return RedirectToAction("Index");
