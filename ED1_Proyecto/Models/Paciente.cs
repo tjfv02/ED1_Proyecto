@@ -14,8 +14,10 @@ namespace ED1_Proyecto.Models
          niño o joven
          Receien nacido
              */
+        
 
         //Datos Personales
+
         public int Id { get;  set; }
         public int Edad { get; set; }
         public string Nombre { get; set; }
@@ -25,18 +27,25 @@ namespace ED1_Proyecto.Models
         public string Municipio { get; set; }
 
         //Datos Salud
+        public int Prioridad { get; set; }
         public string Sintomas { get; set; }
         public string DescripcionContagioPosible { get; set; }
+        public string Fecha { get; set; }
+        public string HoraIngreso { get; set; }
 
         //Descripcion 
-       /*
-        Probabilidad base = 5%
-        Viaje a Europa +10%
-        Conocido contagiado +15%
-        Familiar Contagido +30%
-        Reuniones sociales con sospechosos +5%
-             */
+        /*
+         Probabilidad base = 5%
+         Viaje a Europa +10%
+         Conocido contagiado +15%
+         Familiar Contagido +30%
+         Reuniones sociales con sospechosos +5%
+              */
 
         public string EstadoPaciente { get; set; } //Contagiado o Sospechoso
+
+
+
+
     }
 }

@@ -37,24 +37,6 @@ namespace ED1_Proyecto.Controllers
             try
             {
                 var rand = new Random();
-
-                Paciente PacienteSimulado = new Paciente()
-                {
-
-                    Edad = rand.Next(80),
-                    Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Identificacion="Identificacion"+(DatosPacientesSimulados.Count + 1).ToString(),
-                    Departamento = "Departamento" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Municipio ="Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
-
-                    Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    DescripcionContagioPosible = "Descripcion" + (DatosPacientesSimulados.Count + 1).ToString(),
-
-                    
-
-                };
-
                 SimulacionExamen PruebaContagio = new SimulacionExamen()
                 {
                     ViajeEuropa = Convert.ToBoolean(collection["ViajeEuropa"]),
@@ -63,6 +45,80 @@ namespace ED1_Proyecto.Controllers
                     ReunionesSociales = Convert.ToBoolean(collection["ReunionesSociales"])
 
                 };
+            
+                Departamentos Dep = new Departamentos();
+                int DepAleatorio = Dep.DepartamentoAleatorio();
+                
+                int Porcentaje = 5;
+
+                if (PruebaContagio.ViajeEuropa )
+                {
+                    Porcentaje += 10;
+                }
+                if (PruebaContagio.ConocidoContagiado)
+                {
+                    Porcentaje += 15;
+                }
+                if (PruebaContagio.FamiliarContagiado)
+                {
+                    Porcentaje += 30;
+                }
+                if (PruebaContagio.ReunionesSociales)
+                {
+                    Porcentaje += 5;
+                }
+
+
+                Paciente PacienteSimulado = new Paciente()
+                {
+
+                    Edad = rand.Next(0, 80),
+                    Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Identificacion = "Identificacion" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    Departamento = Dep.DatosDepartamentos[DepAleatorio].Nombre,
+                    Municipio = "Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
+
+                    Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),
+                    DescripcionContagioPosible = "Descripcion" + (DatosPacientesSimulados.Count + 1).ToString(),
+
+                    EstadoPaciente = Porcentaje > 34 ? "Confirmado" : "Sospechoso"
+
+                };
+
+                if (PacienteSimulado.EstadoPaciente=="Confirmado" && PacienteSimulado.Edad >60)
+                {
+                    PacienteSimulado.Prioridad = 1;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Confirmado" && PacienteSimulado.Edad <1)
+                {
+                    PacienteSimulado.Prioridad = 2;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Confirmado" && PacienteSimulado.Edad > 18 && PacienteSimulado.Edad <= 60)
+                {
+                    PacienteSimulado.Prioridad = 3;
+                }
+
+                if (PacienteSimulado.EstadoPaciente == "Sospechoso" && PacienteSimulado.Edad > 60)
+                {
+                    PacienteSimulado.Prioridad = 4;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Confirmado" && PacienteSimulado.Edad >=1 && PacienteSimulado.Edad <=18)
+                {
+                    PacienteSimulado.Prioridad = 5;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Sospechoso" && PacienteSimulado.Edad <1)
+                {
+                    PacienteSimulado.Prioridad = 6;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Sospechoso" && PacienteSimulado.Edad > 18 && PacienteSimulado.Edad <= 60)
+                {
+                    PacienteSimulado.Prioridad = 7;
+                }
+                if (PacienteSimulado.EstadoPaciente == "Sospechoso" && PacienteSimulado.Edad >= 1 && PacienteSimulado.Edad <= 18)
+                {
+                    PacienteSimulado.Prioridad = 8;
+                }
 
 
 
