@@ -11,7 +11,11 @@ namespace ED1_Proyecto.Controllers
     {
         public static List<Paciente> DatosPacientes = new List<Paciente>();
         public static List<Departamentos> DatosDepartamentos = new List<Departamentos>();
+        public static List<Hospital> DatosHospital;
 
+        //Listas Estados
+        public static List<Paciente> PacientesInfectados = new List<Paciente>();
+        public static List<Paciente> PacientesSospechosos = new List<Paciente>();
 
         // GET: Pacientes
         public ActionResult Index()
@@ -28,6 +32,7 @@ namespace ED1_Proyecto.Controllers
         // GET: Pacientes/Create
         public ActionResult Create()
         {
+           
             return View();
         }
 
@@ -37,6 +42,25 @@ namespace ED1_Proyecto.Controllers
         {
             try
             {
+                if (DatosHospital == null)
+                {
+                    DatosHospital = new List<Hospital>();
+                    DatosHospital[1].Ubicacion = "Centro";
+                    DatosHospital[1].NumeroCamas = 10;
+
+                    DatosHospital[2].Ubicacion = "Norte";
+                    DatosHospital[2].NumeroCamas = 10;
+
+                    DatosHospital[3].Ubicacion = "Sur";
+                    DatosHospital[3].NumeroCamas = 10;
+
+                    DatosHospital[4].Ubicacion = "Occidente";
+                    DatosHospital[4].NumeroCamas = 10;
+
+                    DatosHospital[5].Ubicacion = "Oriente";
+                    DatosHospital[5].NumeroCamas = 10;
+                }
+
                 Paciente AgregarPaciente = new Paciente()
                 {
                     //Datos Personales
@@ -94,6 +118,17 @@ namespace ED1_Proyecto.Controllers
 
                 DatosPacientes.Add(AgregarPaciente);
 
+                if (AgregarPaciente.EstadoPaciente == "Confirmado")
+                {
+                    PacientesInfectados.Add(AgregarPaciente);
+                    //Se agragaría a la cola de infectados
+
+                }
+                else
+                {
+                    PacientesSospechosos.Add(AgregarPaciente);
+                }
+
                 return RedirectToAction("Index");
             }
             catch
@@ -101,6 +136,7 @@ namespace ED1_Proyecto.Controllers
                 return View();
             }
         }
+
 
         // GET: Pacientes/Edit/5
         public ActionResult Edit(int id)

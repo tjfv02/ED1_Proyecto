@@ -45,7 +45,5 @@ namespace ED1_Proyecto.Models
         public string EstadoPaciente { get; set; } //Contagiado o Sospechoso
 
 
-
-
     }
 }
