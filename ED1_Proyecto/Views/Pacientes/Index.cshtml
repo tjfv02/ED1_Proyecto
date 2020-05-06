@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<ED1_Proyecto.Models.Paciente>
 
 @{
-    ViewBag.Title = "ListaPacientes";
+    ViewBag.Title = "Index";
 }
 
-<h2>Datos Pacientes</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Agregar Datos ", "IngresoPacientes")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
@@ -33,10 +33,10 @@
             @Html.DisplayNameFor(model => model.Sintomas)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
+            @Html.DisplayNameFor(model => model.DescripcionContagioPosible)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Nombre)
+            @Html.DisplayNameFor(model => model.EstadoPaciente)
         </th>
         <th></th>
     </tr>

@@ -7,53 +7,44 @@ using System.Web.Mvc;
 
 namespace ED1_Proyecto.Controllers
 {
-    public class PacientesController : Controller
+    public class SimulacionesExamenesController : Controller
     {
-        public static List<Paciente> DatosPacientes = new List<Paciente>();
+        public static List<SimulacionExamen> DatosExamen = new List<SimulacionExamen>();
 
-
-        // GET: Pacientes
+        // GET: SimulacionesExamenes
         public ActionResult Index()
         {
-            return View(DatosPacientes);
+            return View(DatosExamen);
         }
 
-        // GET: Pacientes/Details/5
+        // GET: SimulacionesExamenes/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Pacientes/Create
-        public ActionResult Create()
+        // GET: SimulacionesExamenes/Create
+        public ActionResult Create2()
         {
             return View();
         }
 
-        // POST: Pacientes/Create
+        // POST: SimulacionesExamenes/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create2(FormCollection collection)
         {
             try
             {
-                Paciente AgregarPaciente = new Paciente()
+
+                SimulacionExamen PruebaContagio = new SimulacionExamen()
                 {
-                    //Datos Personales
-                    Edad = Convert.ToInt32(collection["Edad"]),
-                    Nombre = collection["Nombre"],
-                    Apellido = collection["Apellido"],
-                    Identificacion = collection["Identificacion"],
-                    Departamento = collection["Departamento"],
-                    Municipio = collection["Municipio"],
-
-                    //Salud
-
-                    Sintomas = collection["Sintomas"],
-                    DescripcionContagioPosible = collection["Descripcion"],
-                    EstadoPaciente = collection["EstadoPaciente"]
+                    ViajeEuropa = Convert.ToBoolean(collection["ViajeEuropa"].Split(',')[0]),
+                    ConocidoContagiado = Convert.ToBoolean(collection["ConocidoContagiado"]),
+                    FamiliarContagiado = Convert.ToBoolean(collection["FamiliarContagiado"]),
+                    ReunionesSociales = Convert.ToBoolean(collection["ReunionesSociales"])
 
                 };
-                DatosPacientes.Add(AgregarPaciente);
+                DatosExamen.Add(PruebaContagio);
 
                 return RedirectToAction("Index");
             }
@@ -63,13 +54,13 @@ namespace ED1_Proyecto.Controllers
             }
         }
 
-        // GET: Pacientes/Edit/5
+        // GET: SimulacionesExamenes/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Pacientes/Edit/5
+        // POST: SimulacionesExamenes/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
@@ -85,13 +76,13 @@ namespace ED1_Proyecto.Controllers
             }
         }
 
-        // GET: Pacientes/Delete/5
+        // GET: SimulacionesExamenes/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Pacientes/Delete/5
+        // POST: SimulacionesExamenes/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

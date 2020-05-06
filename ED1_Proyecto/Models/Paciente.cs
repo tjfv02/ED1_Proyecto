@@ -34,7 +34,7 @@ namespace ED1_Proyecto.Models
         Viaje a Europa +10%
         Conocido contagiado +15%
         Familiar Contagido +30%
-        Reuniones sociales con sospedhosos +5%
+        Reuniones sociales con sospechosos +5%
              */
 
         public string EstadoPaciente { get; set; } //Contagiado o Sospechoso
