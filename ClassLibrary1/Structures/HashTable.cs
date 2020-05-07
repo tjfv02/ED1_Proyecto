@@ -11,7 +11,7 @@ namespace ClassLibrary1.Structures
         
         //                  <Llave, Valor>
         private LinkedList<Tuple<T, TU>>[] items;
-        private int factorLlenado = 3;
+        private int factorLlenado = 3; //ayuda a extender el tamaño de la lista en caso de colision 
         private int tamaño;
 
         public HashTable()
@@ -59,17 +59,17 @@ namespace ClassLibrary1.Structures
             }
         }
 
-        public TU Get(T key)
-        {
-            var pos = PosicionEnHash(key, items.Length);
-            foreach (var item in items[pos].Where(item => item.Item1.Equals(key)))
-            {
-                return item.Item2;
-            }
-            throw new KeyNotFoundException("La llave no existe en la tabla hash.");
-        }
+        //public TU Get(T key)
+        //{
+        //    var pos = PosicionEnHash(key, items.Length);
+        //    foreach (var item in items[pos].Where(item => item.Item1.Equals(key)))
+        //    {
+        //        return item.Item2;
+        //    }
+        //    throw new KeyNotFoundException("La llave no existe en la tabla hash.");
+        //}
 
-        private void ReHashing()
+        private void ReHashing() // Crea nuevamente la tabla e ingresa los datos 
         {
             factorLlenado *= 2;
             var nuevosItems = new LinkedList<Tuple<T, TU>>[items.Length * 2];

@@ -4,33 +4,33 @@ using System.Text;
 
 namespace ClassLibrary1.Structures
 {
-    class ABB
+    class ABB<T>
     {
         //----------------------------------Metodos Arbol------------------------------------------------
-        Nodo NuevoHijo(int linea, ref Nodo hoja, ref Nodo padre, int Altura = 0)
+        Nodo<T> NuevoHijo(T valor, ref Nodo<T> hoja, ref Nodo<T> padre, int Altura = 0)
         {
 
             if (hoja == null)
             {
-                hoja = new Nodo();
-                hoja.Linea = linea;
+                hoja = new Nodo<T>();
+                hoja.Linea = valor;
                 hoja.Padre = padre;
                 hoja.Altura = Altura;
                 return hoja;
             }
             // si es igual
-            else if (linea == hoja.Linea)
+            else if (valor == hoja.Linea)
             {
                 return hoja;
             }
             //Si es mayor
-            else if (linea > hoja.Linea)
+            else if (valor > hoja.Linea)
             {
-                return NuevoHijo(linea, ref hoja.Derecho, ref hoja, Altura + 1);
+                return NuevoHijo(valor, ref hoja.Derecho, ref hoja, Altura + 1);
             }
             else
             {
-                return NuevoHijo(linea, ref hoja.Izquierdo, ref hoja, Altura + 1);
+                return NuevoHijo(valor, ref hoja.Izquierdo, ref hoja, Altura + 1);
             }
 
         }

@@ -46,7 +46,7 @@ namespace ClassLibrary1.Structures
                 Primero = Primero.siguiente;
             }
         }
-        protected T Peek()
+        protected T Peek()// --> Primer valor de la cola 
         {
             return Primero.valor;
         }
