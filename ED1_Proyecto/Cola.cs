@@ -18,20 +18,20 @@ namespace ClassLibrary1.Structures
 
             Nodo<T> temp = NuevoNodo(valor, prioridad);
 
-            if (Primero.Prioridad > prioridad)
+            if (Primero.prioridad > prioridad)
             {
-                temp.Siguiente = Primero;
+                temp.siguiente = Primero;
                 Primero = temp;
             }
             else
             {
-                while (inicio.Siguiente != null && inicio.Siguiente.Prioridad < prioridad)
+                while (inicio.siguiente != null && inicio.siguiente.prioridad < prioridad)
                 {
-                    inicio = inicio.Siguiente;
+                    inicio = inicio.siguiente;
                 }
             }
-            temp.Siguiente = inicio.Siguiente;
-            inicio.Siguiente = temp;
+            temp.siguiente = inicio.siguiente;
+            inicio.siguiente = temp;
         }
         public T Eliminar()
         {
@@ -43,20 +43,20 @@ namespace ClassLibrary1.Structures
         {
             if (Primero != null)
             {
-                Primero = Primero.Siguiente;
+                Primero = Primero.siguiente;
             }
         }
         protected T Peek()// --> Primer valor de la cola 
         {
-            return Primero.Valor;
+            return Primero.valor;
         }
 
         public static Nodo<T> NuevoNodo(T valor, int prioridad)
         {
             var temp = new Nodo<T>();
-            temp.Valor = valor;
-            temp.Prioridad = prioridad;
-            temp.Siguiente = null;
+            temp.valor = valor;
+            temp.prioridad = prioridad;
+            temp.siguiente = null;
 
             return temp;
         }

@@ -117,28 +117,35 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABB.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="AVL.cs" />
+    <Compile Include="Cola.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PacientesController.cs" />
     <Compile Include="Controllers\SimulacionesExamenesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HashTable.cs" />
     <Compile Include="Models\Departamentos.cs" />
     <Compile Include="Models\Estadisticas.cs" />
     <Compile Include="Models\Hospital.cs" />
     <Compile Include="Models\Paciente.cs" />
     <Compile Include="Models\SimulacionCama.cs" />
     <Compile Include="Models\SimulacionExamen.cs" />
+    <Compile Include="Nodo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClassLibrary1.csproj" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="CustomGenerics.csproj" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -175,6 +182,10 @@
     <Content Include="Views\SimulacionesExamenes\Create.cshtml" />
     <Content Include="Views\SimulacionesExamenes\Create2.cshtml" />
     <Content Include="Views\Pacientes\Create.cshtml" />
+    <Content Include="Views\Pacientes\PacientesConfirmados.cshtml" />
+    <Content Include="Views\Pacientes\PruebaCreate.cshtml" />
+    <Content Include="Views\Pacientes\ListaExamenes.cshtml" />
+    <Content Include="Views\Pacientes\SimularExamen.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

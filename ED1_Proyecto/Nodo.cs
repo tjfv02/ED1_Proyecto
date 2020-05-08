@@ -7,11 +7,11 @@ namespace ClassLibrary1.Structures
     class Nodo<T>
     {
         //Valor
-        public T Valor { get; set; }
+        public T valor { get; set; }
 
         //Para la cola
-        public Nodo<T> Siguiente { get; set; }
-        public int Prioridad { get; set; }
+        public Nodo<T> siguiente { get; set; }
+        public int prioridad { get; set; }
 
         //Para el arbol 
         public Nodo<T> Padre;

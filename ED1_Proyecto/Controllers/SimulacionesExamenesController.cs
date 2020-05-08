@@ -1,5 +1,6 @@
 ﻿using ED1_Proyecto.Models;
 using System;
+using ED1_Proyecto.Controllers;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,6 +13,8 @@ namespace ED1_Proyecto.Controllers
         public static List<SimulacionExamen> DatosExamen = new List<SimulacionExamen>();
         public static List<Paciente> DatosPacientesSimulados = new List<Paciente>();
 
+        PacientesController Prueba;
+        
         // GET: SimulacionesExamenes
         public ActionResult Index()
         {
@@ -36,6 +39,7 @@ namespace ED1_Proyecto.Controllers
         {
             try
             {
+
                 var rand = new Random();
                 SimulacionExamen PruebaContagio = new SimulacionExamen()
                 {

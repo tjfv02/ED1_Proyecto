@@ -17,97 +17,166 @@ namespace ED1_Proyecto.Models
         {
             Random DepRand = new Random();
             LlenandoDepartamentos();
-            return DepRand.Next(1, 22);
+            return 0;// DepRand.Next(0, 3);
         }
         public void LlenandoDepartamentos()
         {
-            DatosDepartamentos[1].Id = 1;
-            DatosDepartamentos[1].Nombre = "Alta Verapaz";
-            DatosDepartamentos[1].Region = "Norte";
+            
+            DatosDepartamentos.Add( new Departamentos() {
+                Id = 1,
+                Nombre = "Alta Verapaz",
+                Region = "Norte"
+            });
 
-            DatosDepartamentos[2].Id = 2;
-            DatosDepartamentos[2].Nombre = "Baja Verapaz";
-            DatosDepartamentos[2].Region = "Norte";
+            DatosDepartamentos.Add(new Departamentos()
+            {
+               
+                Id = 2,
+                Nombre = "Baja Verapaz",
+                Region = "Norte"
+            });
 
-            DatosDepartamentos[3].Id = 3;
-            DatosDepartamentos[3].Nombre = "Chimaltenango";
-            DatosDepartamentos[3].Region = "Centro";
+            DatosDepartamentos.Add(new Departamentos()
+            {
 
-            DatosDepartamentos[4].Id = 4;
-            DatosDepartamentos[4].Nombre = "Chiquimula";
-            DatosDepartamentos[4].Region = "Oriente";
+                Id = 3,
+                Nombre = "Chimaltenango",
+                Region = "Centro"
 
-            DatosDepartamentos[5].Id = 5;
-            DatosDepartamentos[5].Nombre = "Peten";
-            DatosDepartamentos[5].Region = "Norte";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+            Id = 4,
+                Nombre = "Chiquimula",
+                Region = "Oriente"
 
-            DatosDepartamentos[6].Id = 6;
-            DatosDepartamentos[6].Nombre = "El Progreso";
-            DatosDepartamentos[6].Region = "Oriente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 5,
+                Nombre = "Peten",
+                Region = "Norte"
 
-            DatosDepartamentos[7].Id = 7;
-            DatosDepartamentos[7].Nombre = "Quiche";
-            DatosDepartamentos[7].Region = "Occidente";
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 6,
+                Nombre = "El Progreso",
+                Region = "Oriente"
 
-            DatosDepartamentos[8].Id = 8;
-            DatosDepartamentos[8].Nombre = "Escuintla";
-            DatosDepartamentos[8].Region = "Sur";
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 7,
+                Nombre = "Quiche",
+                Region = "Occidente"
 
-            DatosDepartamentos[9].Id = 9;
-            DatosDepartamentos[9].Nombre = "Guatemla";
-            DatosDepartamentos[9].Region = "Centro";
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 8,
+                Nombre = "Escuintla",
+                Region = "Sur"
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 9,
+                Nombre = "Guatemla",
+                Region = "Centro"
 
-            DatosDepartamentos[10].Id = 10;
-            DatosDepartamentos[10].Nombre = "Huehuetenango";
-            DatosDepartamentos[10].Region = "Occidente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 10,
+                Nombre = "Huehuetenango",
+                Region = "Occidente"
 
-            DatosDepartamentos[11].Id = 11;
-            DatosDepartamentos[11].Nombre = "Izabal";
-            DatosDepartamentos[11].Region = "Oriente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 11,
+                Nombre = "Izabal",
+                Region = "Oriente"
 
-            DatosDepartamentos[12].Id = 12;
-            DatosDepartamentos[12].Nombre = "Jalapa";
-            DatosDepartamentos[12].Region = "Oriente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 12,
+                Nombre = "Jalapa",
+                Region = "Oriente"
 
-            DatosDepartamentos[13].Id = 13;
-            DatosDepartamentos[13].Nombre = "Jutiapa";
-            DatosDepartamentos[13].Region = "Oriente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
 
-            DatosDepartamentos[14].Id = 14;
-            DatosDepartamentos[14].Nombre = "Quetzaltenango";
-            DatosDepartamentos[14].Region = "Occidente";
+                Id = 13,
+                Nombre = "Jutiapa",
+                Region = "Oriente"
 
-            DatosDepartamentos[15].Id = 15;
-            DatosDepartamentos[15].Nombre = "Retalhuleu";
-            DatosDepartamentos[15].Region = "Occidente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 14,
+                Nombre = "Quetzaltenango",
+                Region = "Occidente"
 
-            DatosDepartamentos[16].Id = 16;
-            DatosDepartamentos[16].Nombre = "Sacatepequez";
-            DatosDepartamentos[16].Region = "Centro";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 15,
+                Nombre = "Retalhuleu",
+                Region = "Occidente"
 
-            DatosDepartamentos[17].Id = 17;
-            DatosDepartamentos[17].Nombre = "San Marcos";
-            DatosDepartamentos[17].Region = "Occidente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 16,
+                Nombre = "Sacatepequez",
+                Region = "Centro"
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+            Id = 17,
+                Nombre = "San Marcos",
+                Region = "Occidente"
 
-            DatosDepartamentos[18].Id = 18;
-            DatosDepartamentos[18].Nombre = "Santa Rosa";
-            DatosDepartamentos[18].Region = "Oriente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 18,
+                Nombre = "Santa Rosa",
+                Region = "Oriente"
 
-            DatosDepartamentos[19].Id = 19;
-            DatosDepartamentos[19].Nombre = "Solola";
-            DatosDepartamentos[19].Region = "Occidente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 19,
+                Nombre = "Solola",
+                Region = "Occidente"
 
-            DatosDepartamentos[20].Id = 20;
-            DatosDepartamentos[20].Nombre = "Suchitepequez";
-            DatosDepartamentos[20].Region = "Occidente";
 
-            DatosDepartamentos[21].Id = 21;
-            DatosDepartamentos[21].Nombre = "Totonicapan";
-            DatosDepartamentos[21].Region = "Occidente";
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 20,
+                Nombre = "Suchitepequez",
+                Region = "Occidente"
 
-            DatosDepartamentos[22].Id = 22;
-            DatosDepartamentos[22].Nombre = "Zacapa";
-            DatosDepartamentos[22].Region = "Oriente";
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 21,
+                Nombre = "Totonicapan",
+                Region = "Occidente"
+
+            });
+
+
+
+
+
+
+                Id = 22;
+                Nombre = "Zacapa";
+                Region = "Oriente";
         }
         
     }

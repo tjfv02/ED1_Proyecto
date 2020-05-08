@@ -12,10 +12,17 @@ namespace ED1_Proyecto.Models
         public int NumeroCamas { get; set; }
         public int CamasLlenas { get; set; }
 
+        public string CadenaUnica { get; set; }
+
         public List<Paciente> DatosPacientes = new List<Paciente>();
                            //String 
-        public HashTable<int, Hospital> Camas = new HashTable<int, Hospital>();
+        public HashTable<string, Hospital> Camas = new HashTable<string, Hospital>();
 
-        
+        //void CadenaUnica()
+        //{
+        //    // hospital + numero de cama 
+        //    string CadenaUnica;
+        //    CadenaUnica = 
+        //}
     }
 }
