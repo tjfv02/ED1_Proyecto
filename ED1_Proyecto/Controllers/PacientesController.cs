@@ -27,13 +27,31 @@ namespace ED1_Proyecto.Controllers
         public static List<Paciente> PacientesInfectados = new List<Paciente>();
         public static List<Paciente> PacientesSospechosos = new List<Paciente>();
 
+
+
         //Hash
-        //public HashTable<int, Hospital> Camas = new HashTable<int, Hospital>();
+        public HashTable<string, Hospital> CamasCentro = new HashTable<string, Hospital>();
+        public HashTable<string, Hospital> CamasNorte = new HashTable<string, Hospital>();
+        public HashTable<string, Hospital> CamasSur = new HashTable<string, Hospital>();
+        public HashTable<string, Hospital> CamasOriente = new HashTable<string, Hospital>();
+        public HashTable<string, Hospital> CamasOccidente = new HashTable<string, Hospital>();
 
         // GET: Pacientes
         public ActionResult Index()
         {
             return View(DatosPacientes);
+        }
+
+        // GET: Pacientes
+        public ActionResult PacientesConfirmados()
+        {
+            return View(PacientesInfectados);
+        }
+
+        // GET: Pacientes
+        public ActionResult PacientesNoConfirmados()
+        {
+            return View(PacientesSospechosos);
         }
 
         // GET: SimulacionesExamenes
@@ -43,11 +61,7 @@ namespace ED1_Proyecto.Controllers
         }
 
 
-        // GET: Pacientes/PacientesConfirmados
-        public ActionResult PacientesConfirmados()
-        {
-            return View(PacientesInfectados);
-        }
+        
 
         // GET: Pacientes/Details/5
         public ActionResult Details(int id)
@@ -56,19 +70,7 @@ namespace ED1_Proyecto.Controllers
         }
 
 
-        // GET: Pacientes/Create
-        public ActionResult PruebaCreate()
-        {
-
-            return View();
-        }
-        
-        [HttpPost]
-        public ActionResult PruebaCreate(FormCollection collection)
-        {
-
-            return View();
-        }
+      
         // GET: Pacientes/Create
         public ActionResult Create()
         {
@@ -86,25 +88,51 @@ namespace ED1_Proyecto.Controllers
                 {
                     DatosHospital = new List<Hospital>();
 
-                    DatosHospital[1].Ubicacion = "Centro";
-                    DatosHospital[1].NumeroCamas = 10;
-                    DatosHospital[1].CadenaUnica = DatosHospital[1].Ubicacion + "00";
+                    DatosHospital.Add(new Hospital()
+                    {
 
-                    DatosHospital[2].Ubicacion = "Norte";
-                    DatosHospital[2].NumeroCamas = 10;
-                    DatosHospital[2].CadenaUnica = DatosHospital[2].Ubicacion + "01";
+                        Ubicacion = "Centro",
+                        NumeroCamas = 10
+                    });
+                    DatosHospital[DatosHospital.Count - 1].CadenaUnica = DatosHospital[DatosHospital.Count - 1].Ubicacion;
 
-                    DatosHospital[3].Ubicacion = "Sur";
-                    DatosHospital[3].NumeroCamas = 10;
-                    DatosHospital[3].CadenaUnica = DatosHospital[3].Ubicacion + "02";
+                    
+                    DatosHospital.Add(new Hospital()
+                    {
+                    Ubicacion = "Norte",
+                    NumeroCamas = 10
+                    
 
-                    DatosHospital[4].Ubicacion = "Occidente";
-                    DatosHospital[4].NumeroCamas = 10;
-                    DatosHospital[4].CadenaUnica = DatosHospital[4].Ubicacion;
+                    });
+                    DatosHospital[DatosHospital.Count - 1].CadenaUnica = DatosHospital[DatosHospital.Count - 1].Ubicacion;
 
-                    DatosHospital[5].Ubicacion = "Oriente";
-                    DatosHospital[5].NumeroCamas = 10;
-                    DatosHospital[5].CadenaUnica = DatosHospital[5].Ubicacion;
+                    DatosHospital.Add(new Hospital()
+                    {
+                        Ubicacion = "Sur",
+                        NumeroCamas = 10
+
+                    });
+                    DatosHospital[DatosHospital.Count - 1].CadenaUnica = DatosHospital[DatosHospital.Count - 1].Ubicacion;
+
+                    DatosHospital.Add(new Hospital()
+                    {
+                        Ubicacion = "Occidente",
+                        NumeroCamas = 10
+                        
+
+                    });
+                    DatosHospital[DatosHospital.Count - 1].CadenaUnica = DatosHospital[DatosHospital.Count - 1].Ubicacion;
+
+                    DatosHospital.Add(new Hospital()
+                    {
+                        Ubicacion = "Oriente",
+                        NumeroCamas = 10
+                        
+
+                    });
+                    DatosHospital[DatosHospital.Count - 1].CadenaUnica = DatosHospital[DatosHospital.Count - 1].Ubicacion;
+
+
                 }
 
                 Paciente AgregarPaciente = new Paciente()
@@ -177,14 +205,14 @@ namespace ED1_Proyecto.Controllers
                 }
                 else
                 {
-                    PacientesSospechosos.Add(AgregarPaciente);
+                    //PacientesSospechosos.Add(AgregarPaciente);
                     ColaSospechosos.Insertar(AgregarPaciente.Identificacion, AgregarPaciente.Prioridad);
-                    return RedirectToAction("Create","SimulacionesExamenes",new { id = PacienteActual });
+                    return RedirectToAction("SimularExamen");
                 }
 
                 return RedirectToAction("Index");
             }
-            catch
+            catch (Exception E)
             {
                 return View();
             }
@@ -235,22 +263,26 @@ namespace ED1_Proyecto.Controllers
                 }
 
 
-                Paciente PacienteSimulado = new Paciente()
-                {
+                Paciente PacienteSimulado = DatosPacientes[DatosPacientes.Count - 1];
 
-                    Edad = rand.Next(0, 80),
-                    Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Identificacion = "Identificacion" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Departamento = Dep.DatosDepartamentos[DepAleatorio].Nombre,
-                    Municipio = "Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
+                PacienteSimulado.EstadoPaciente = Porcentaje > 34 ? "Confirmado" : "Sospechoso";
 
-                    Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    DescripcionContagioPosible = "Descripcion" + (DatosPacientesSimulados.Count + 1).ToString(),
+                //Paciente PacienteSimulado = new Paciente()
+                //{
 
-                    EstadoPaciente = Porcentaje > 34 ? "Confirmado" : "Sospechoso"
+                //    Edad = rand.Next(0, 80),
+                //    Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
+                //    Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
+                //    Identificacion = "Identificacion" + (DatosPacientesSimulados.Count + 1).ToString(),
+                //    Departamento = Dep.DatosDepartamentos[DepAleatorio].Nombre,
+                //    Municipio = "Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
 
-                };
+                //    Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),
+                //    DescripcionContagioPosible = "Descripcion" + (DatosPacientesSimulados.Count + 1).ToString(),
+
+                //    EstadoPaciente = Porcentaje > 34 ? "Confirmado" : "Sospechoso"
+
+                //};
 
                 if (PacienteSimulado.EstadoPaciente == "Confirmado" && PacienteSimulado.Edad > 60)
                 {
@@ -289,6 +321,13 @@ namespace ED1_Proyecto.Controllers
 
 
                 DatosExamen.Add(PruebaContagio);
+
+                if (PacienteSimulado.EstadoPaciente =="Sospechoso")
+                {
+                    ColaSospechosos.Eliminar();
+                    PacientesSospechosos.Add(DatosPacientes[DatosPacientes.Count - 1]);
+                }
+               
 
                 return RedirectToAction("Index");
             }

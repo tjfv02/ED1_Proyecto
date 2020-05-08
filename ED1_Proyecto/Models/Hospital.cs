@@ -14,9 +14,9 @@ namespace ED1_Proyecto.Models
 
         public string CadenaUnica { get; set; }
 
-        public List<Paciente> DatosPacientes = new List<Paciente>();
+        //public List<Paciente> DatosPacientes = new List<Paciente>();
                            //String 
-        public HashTable<string, Hospital> Camas = new HashTable<string, Hospital>();
+        //public HashTable<string, Hospital> Camas = new HashTable<string, Hospital>();
 
         //void CadenaUnica()
         //{

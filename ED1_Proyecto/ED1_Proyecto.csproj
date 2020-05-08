@@ -183,9 +183,9 @@
     <Content Include="Views\SimulacionesExamenes\Create2.cshtml" />
     <Content Include="Views\Pacientes\Create.cshtml" />
     <Content Include="Views\Pacientes\PacientesConfirmados.cshtml" />
-    <Content Include="Views\Pacientes\PruebaCreate.cshtml" />
     <Content Include="Views\Pacientes\ListaExamenes.cshtml" />
     <Content Include="Views\Pacientes\SimularExamen.cshtml" />
+    <Content Include="Views\Pacientes\PacientesNoConfirmados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

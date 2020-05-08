@@ -1,25 +1,13 @@
 ﻿@model IEnumerable<ED1_Proyecto.Models.Paciente>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "PacientesNoConfirmados";
 }
 
-<h2>Pacientes registrados</h2>
+<h2>PacientesNoConfirmados</h2>
 
 <p>
-    @Html.ActionLink("Registrar Nuevo paciente", "Create")
-    
-
 </p>
-<p>
-
-    @Html.ActionLink("Ver Pacientes Confirmados", "PacientesConfirmados")
-</p>
-<p>
-    @Html.ActionLink("Ver Pacientes Sospechosos", "PacientesNoConfirmados")
-
-</p>
-
 <table class="table">
     <tr>
         <th>
@@ -41,10 +29,19 @@
             @Html.DisplayNameFor(model => model.Municipio)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Prioridad)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Sintomas)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DescripcionContagioPosible)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraIngreso)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.EstadoPaciente)
@@ -73,10 +70,19 @@
             @Html.DisplayFor(modelItem => item.Municipio)
         </td>
         <td>
+            @Html.DisplayFor(modelItem => item.Prioridad)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Sintomas)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DescripcionContagioPosible)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Fecha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HoraIngreso)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.EstadoPaciente)

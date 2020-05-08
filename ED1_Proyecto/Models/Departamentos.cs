@@ -17,7 +17,7 @@ namespace ED1_Proyecto.Models
         {
             Random DepRand = new Random();
             LlenandoDepartamentos();
-            return 0;// DepRand.Next(0, 3);
+            return DepRand.Next(0, 21);
         }
         public void LlenandoDepartamentos()
         {
@@ -168,15 +168,19 @@ namespace ED1_Proyecto.Models
                 Region = "Occidente"
 
             });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 22,
+                Nombre = "Zacapa",
+                Region = "Oriente"
+
+            });
 
 
 
 
 
 
-                Id = 22;
-                Nombre = "Zacapa";
-                Region = "Oriente";
         }
         
     }
