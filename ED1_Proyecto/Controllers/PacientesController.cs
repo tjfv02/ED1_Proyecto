@@ -10,13 +10,17 @@ namespace ED1_Proyecto.Controllers
 {
     public class PacientesController : Controller
     {
+        Nodo<string> nodo;
+
         public static int PacienteActual;
 
+        public static List<SimulacionCama> Camas = new List<SimulacionCama>();
+
         public static List<Paciente> DatosPacientes = new List<Paciente>();
+        public static List<Paciente> DatosPacientesSimulados = new List<Paciente>();
         public static List<Departamentos> DatosDepartamentos = new List<Departamentos>();
         public static List<Hospital> DatosHospital;
         public static List<SimulacionExamen> DatosExamen = new List<SimulacionExamen>();
-        public static List<Paciente> DatosPacientesSimulados = new List<Paciente>();
 
         //Colas 
         private static Cola<string> ColaConfirmados = new Cola<string>();
@@ -30,11 +34,11 @@ namespace ED1_Proyecto.Controllers
 
 
         //Hash
-        public HashTable<string, Hospital> CamasCentro = new HashTable<string, Hospital>();
-        public HashTable<string, Hospital> CamasNorte = new HashTable<string, Hospital>();
-        public HashTable<string, Hospital> CamasSur = new HashTable<string, Hospital>();
-        public HashTable<string, Hospital> CamasOriente = new HashTable<string, Hospital>();
-        public HashTable<string, Hospital> CamasOccidente = new HashTable<string, Hospital>();
+        public static HashTable<string, Paciente> CamasCentro = new HashTable<string, Paciente>();
+        public static HashTable<string, Paciente> CamasNorte = new HashTable<string, Paciente>();
+        public static HashTable<string, Paciente> CamasSur = new HashTable<string, Paciente>();
+        public static HashTable<string, Paciente> CamasOriente = new HashTable<string, Paciente>();
+        public static HashTable<string, Paciente> CamasOccidente = new HashTable<string, Paciente>();
 
         // GET: Pacientes
         public ActionResult Index()
@@ -148,7 +152,7 @@ namespace ED1_Proyecto.Controllers
                     //Salud
 
                     Sintomas = collection["Sintomas"],
-                    DescripcionContagioPosible = collection["Descripcion"],
+                    DescripcionContagioPosible = collection["DescripcionContagioPosible"],
                     Fecha = collection["Fecha"],
                     HoraIngreso = collection["HoraIngreso"],
                     EstadoPaciente = collection["EstadoPaciente"]
@@ -241,6 +245,7 @@ namespace ED1_Proyecto.Controllers
                 };
 
                 Departamentos Dep = new Departamentos();
+                LlenandoDepartamentos();
                 int DepAleatorio = Dep.DepartamentoAleatorio();
 
                 int Porcentaje = 5;
@@ -325,9 +330,16 @@ namespace ED1_Proyecto.Controllers
                 if (PacienteSimulado.EstadoPaciente =="Sospechoso")
                 {
                     ColaSospechosos.Eliminar();
+                    DatosPacientes[DatosPacientes.Count - 1].EstadoPaciente = "Sano";
                     PacientesSospechosos.Add(DatosPacientes[DatosPacientes.Count - 1]);
                 }
-               
+
+                if (PacienteSimulado.EstadoPaciente == "Confirmado")
+                {
+                    PacientesInfectados.Add(DatosPacientes[DatosPacientes.Count - 1]);
+                    //return RedirectToAction("AsignarCama");
+                }
+
 
                 return RedirectToAction("Index");
             }
@@ -372,7 +384,27 @@ namespace ED1_Proyecto.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
+                Paciente Eliminado = new Paciente()
+                {
+                    //Datos Personales
+                    Edad = Convert.ToInt32(collection["Edad"]),
+                    Nombre = collection["Nombre"],
+                    Apellido = collection["Apellido"],
+                    Identificacion = collection["Identificacion"],
+                    Departamento = collection["Departamento"],
+                    Municipio = collection["Municipio"],
+
+                    //Salud
+
+                    Sintomas = collection["Sintomas"],
+                    DescripcionContagioPosible = collection["DescripcionContagioPosible"],
+                    Fecha = collection["Fecha"],
+                    HoraIngreso = collection["HoraIngreso"],
+                    EstadoPaciente = collection["EstadoPaciente"]
+
+                };
+                DatosPacientes.Remove(Eliminado);
+
 
                 return RedirectToAction("Index");
             }
@@ -382,9 +414,224 @@ namespace ED1_Proyecto.Controllers
             }
         }
 
-        
-       
+        public ActionResult Estadisticas()
+        {
+            int NumConfirmados = PacientesInfectados.Count - 1;
+            int NumSospechosos = PacientesSospechosos.Count - 1;
+            int PorcentajeSospechosos = (PacientesSospechosos.Count - 1 * 100) / DatosPacientes.Count - 1;
 
+            return View();
+        }
+        
+       public ActionResult AsignarCama()
+        {
+          
+            for (int i = 0; i < DatosDepartamentos.Count-1; i++)
+            {
+                if (PacientesInfectados[PacientesInfectados.Count - 1].Departamento==DatosDepartamentos[i].Nombre)
+                {
+                    //asignar region al paciente 
+
+
+                    if (DatosDepartamentos[i].Region=="Centro")
+                    {
+                        CamasCentro.Insertar(PacientesInfectados[PacientesInfectados.Count - 1].Identificacion, PacientesInfectados[PacientesInfectados.Count - 1]);
+                        PacientesInfectados[PacientesInfectados.Count - 1].HospitalAsignado = "Centro";
+                        DatosPacientes[DatosPacientes.Count - 1].HospitalAsignado = "Centro";
+                    }
+                    if (DatosDepartamentos[i].Region == "Norte")
+                    {
+                        CamasNorte.Insertar(PacientesInfectados[PacientesInfectados.Count - 1].Identificacion, PacientesInfectados[PacientesInfectados.Count - 1]);
+                        PacientesInfectados[PacientesInfectados.Count - 1].HospitalAsignado = "Norte";
+                        DatosPacientes[DatosPacientes.Count - 1].HospitalAsignado = "Norte";
+                    }
+                    if (DatosDepartamentos[i].Region == "Sur")
+                    {
+                        CamasSur.Insertar(PacientesInfectados[PacientesInfectados.Count - 1].Identificacion, PacientesInfectados[PacientesInfectados.Count - 1]);
+                        PacientesInfectados[PacientesInfectados.Count - 1].HospitalAsignado = "Sur";
+                        DatosPacientes[DatosPacientes.Count - 1].HospitalAsignado = "Sur";
+                    }
+                    if (DatosDepartamentos[i].Region == "Oriente")
+                    {
+                        CamasOriente.Insertar(PacientesInfectados[PacientesInfectados.Count - 1].Identificacion, PacientesInfectados[PacientesInfectados.Count - 1]);
+                        PacientesInfectados[PacientesInfectados.Count - 1].HospitalAsignado = "Oriente";
+                        DatosPacientes[DatosPacientes.Count - 1].HospitalAsignado = "Oriente";
+                    }
+                    if (DatosDepartamentos[i].Region == "Occidente")
+                    {
+                        CamasOccidente.Insertar(PacientesInfectados[PacientesInfectados.Count - 1].Identificacion, PacientesInfectados[PacientesInfectados.Count - 1]);
+                        PacientesInfectados[PacientesInfectados.Count - 1].HospitalAsignado = "Occidente";
+                        DatosPacientes[DatosPacientes.Count - 1].HospitalAsignado = "Occidente";
+                    }
+                }
+            }
+           
+            return View();
+        }
+        public void LlenandoDepartamentos()
+        {
+
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 1,
+                Nombre = "Alta Verapaz",
+                Region = "Norte"
+            });
+
+            DatosDepartamentos.Add(new Departamentos()
+            {
+
+                Id = 2,
+                Nombre = "Baja Verapaz",
+                Region = "Norte"
+            });
+
+            DatosDepartamentos.Add(new Departamentos()
+            {
+
+                Id = 3,
+                Nombre = "Chimaltenango",
+                Region = "Centro"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 4,
+                Nombre = "Chiquimula",
+                Region = "Oriente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 5,
+                Nombre = "Peten",
+                Region = "Norte"
+
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 6,
+                Nombre = "El Progreso",
+                Region = "Oriente"
+
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 7,
+                Nombre = "Quiche",
+                Region = "Occidente"
+
+            }); DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 8,
+                Nombre = "Escuintla",
+                Region = "Sur"
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 9,
+                Nombre = "Guatemla",
+                Region = "Centro"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 10,
+                Nombre = "Huehuetenango",
+                Region = "Occidente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 11,
+                Nombre = "Izabal",
+                Region = "Oriente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 12,
+                Nombre = "Jalapa",
+                Region = "Oriente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+
+                Id = 13,
+                Nombre = "Jutiapa",
+                Region = "Oriente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 14,
+                Nombre = "Quetzaltenango",
+                Region = "Occidente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 15,
+                Nombre = "Retalhuleu",
+                Region = "Occidente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 16,
+                Nombre = "Sacatepequez",
+                Region = "Centro"
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 17,
+                Nombre = "San Marcos",
+                Region = "Occidente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 18,
+                Nombre = "Santa Rosa",
+                Region = "Oriente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 19,
+                Nombre = "Solola",
+                Region = "Occidente"
+
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 20,
+                Nombre = "Suchitepequez",
+                Region = "Occidente"
+
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 21,
+                Nombre = "Totonicapan",
+                Region = "Occidente"
+
+            });
+            DatosDepartamentos.Add(new Departamentos()
+            {
+                Id = 22,
+                Nombre = "Zacapa",
+                Region = "Oriente"
+
+            });
+
+
+
+
+
+
+        }
 
     }
 }

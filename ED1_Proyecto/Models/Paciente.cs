@@ -43,6 +43,8 @@ namespace ED1_Proyecto.Models
               */
 
         public string EstadoPaciente { get; set; } //Contagiado o Sospechoso
+        public string HospitalAsignado { get; set; }
+        public string CamaAsignada { get; set; }
 
 
     }

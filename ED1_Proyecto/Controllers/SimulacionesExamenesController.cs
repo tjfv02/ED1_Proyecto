@@ -80,7 +80,7 @@ namespace ED1_Proyecto.Controllers
                     Nombre = "Nombre" + (DatosPacientesSimulados.Count + 1).ToString(),
                     Apellido = "Apellido" + (DatosPacientesSimulados.Count + 1).ToString(),
                     Identificacion = "Identificacion" + (DatosPacientesSimulados.Count + 1).ToString(),
-                    Departamento = Dep.DatosDepartamentos[DepAleatorio].Nombre,
+                   // Departamento = Dep.DatosDepartamentos[DepAleatorio].Nombre,
                     Municipio = "Municipio" + (DatosPacientesSimulados.Count + 1).ToString(),
 
                     Sintomas = "Sintomas" + (DatosPacientesSimulados.Count + 1).ToString(),

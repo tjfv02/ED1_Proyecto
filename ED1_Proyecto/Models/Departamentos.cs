@@ -11,15 +11,18 @@ namespace ED1_Proyecto.Models
         public string Nombre { get; set; }
         public string Region { get; set; }
 
-        public  List<Departamentos> DatosDepartamentos = new List<Departamentos>();
+        //public static List<Departamentos> DatosDepartamentos = new List<Departamentos>();
 
         public int DepartamentoAleatorio()
         {
             Random DepRand = new Random();
-            LlenandoDepartamentos();
+            //LlenandoDepartamentos();
             return DepRand.Next(0, 21);
         }
-        public void LlenandoDepartamentos()
+
+        //sim es igual el departameneto
+        //    extraer nombre region
+       /* public void LlenandoDepartamentos()
         {
             
             DatosDepartamentos.Add( new Departamentos() {
@@ -181,7 +184,7 @@ namespace ED1_Proyecto.Models
 
 
 
-        }
+        }*/
         
     }
 }
